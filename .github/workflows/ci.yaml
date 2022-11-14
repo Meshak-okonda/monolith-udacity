@@ -4,7 +4,7 @@ on:
   push:
     branches: ['main']
   pull_request:
-    branches: ['main']
+    branches: ['main'] 
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
     - run: docker tag api-users:v1  mamanmeshak/api-users:v1
     - run: docker tag api-feed:v1  mamanmeshak/api-feed:v1
     - run: docker tag reverseproxy:latest  mamanmeshak/reverseproxy:latest
-
+    - run: docker login --username mamanmeshak --password-stdin ${{secrets.DOCKER_KEY}}
     - run: docker push mamanmeshak/udagram-frontend:v1
     - run: docker push mamanmeshak/api-feed:v1
     - run: docker push mamanmeshak/api-users:v1

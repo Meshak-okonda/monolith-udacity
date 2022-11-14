@@ -12,7 +12,6 @@ jobs:
   
     steps:
     - uses: actions/checkout@v3
-    - run: docker login --username mamanmesh --password-stdin dckr_pat_PB1SFugvxVaPOIynzXVEKSYZCO0
     - run: docker-compose -f docker_compose_build.yml build --parallel
     - run: docker tag udagram-frontend:local  mamanmeshak/udagram-frontend:v1
     - run: docker tag api-users:v1  mamanmeshak/api-users:v1

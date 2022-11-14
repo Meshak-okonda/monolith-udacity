@@ -1,0 +1,28 @@
+name : Node.js CI
+
+on: 
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+  
+    steps:
+    - uses: actions/checkout@v3
+    - run: docker login --username mamanmesh --password-stdin dckr_pat_PB1SFugvxVaPOIynzXVEKSYZCO0
+    - run: docker-compose -f docker_compose_build.yml build --parallel
+    - run: docker tag udagram-frontend:local  mamanmeshak/udagram-frontend:v1
+    - run: docker tag api-users:v1  mamanmeshak/api-users:v1
+    - run: docker tag api-feed:v1  mamanmeshak/api-feed:v1
+    - run: docker tag reverseproxy:latest  mamanmeshak/reverseproxy:latest
+
+    - run: docker push mamanmeshak/udagram-frontend:v1
+    - run: docker push mamanmeshak/api-feed:v1
+    - run: docker push mamanmeshak/api-users:v1
+    - run: docker push mamanmeshak/reverseproxy:latest
+    - run: npm run build --if-present
+    - run: npm run build --if-present
+    - run: npm test

@@ -12,12 +12,12 @@ jobs:
   
     steps:
     - uses: actions/checkout@v3
+    - run: docker login -u "mamanmeshak" -p "${{secrets.DOCKER_KEY}}"
     - run: docker-compose -f docker_compose_build.yml build --parallel
     - run: docker tag udagram-frontend:local  mamanmeshak/udagram-frontend:v1
     - run: docker tag api-users:v1  mamanmeshak/api-users:v1
     - run: docker tag api-feed:v1  mamanmeshak/api-feed:v1
     - run: docker tag reverseproxy:latest  mamanmeshak/reverseproxy:latest
-    - run: docker login --username mamanmeshak --password-stdin ${{secrets.DOCKER_KEY}}
     - run: docker push mamanmeshak/udagram-frontend:v1
     - run: docker push mamanmeshak/api-feed:v1
     - run: docker push mamanmeshak/api-users:v1

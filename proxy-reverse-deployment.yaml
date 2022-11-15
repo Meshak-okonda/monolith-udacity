@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proxy-reverse-deployment
+  labels:
+    app: proxy-reverse
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: proxy-reverse
+  template:
+    metadata:
+      labels:
+        app: proxy-reverse
+    spec:
+      containers:
+      - name: proxy-reverse
+        image: mamanmeshak/reverseproxy:latest

@@ -12,7 +12,7 @@ services:
     build:
       context: ./api-feed
     image: api-feed:v1
-  frontend:
+  udagram-frontend:
     build:
       context: ./udagram-frontend
     image: udagram-frontend:local

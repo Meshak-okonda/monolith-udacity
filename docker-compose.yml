@@ -9,7 +9,7 @@ services:
         - api-users
         - api-feed
   api-users:
-    image: api-users:v1
+    image: api-users
     environment:
       POSTGRES_USERNAME: $POSTGRES_USERNAME
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD 
@@ -21,7 +21,7 @@ services:
       JWT_SECRET: $JWT_SECRET
       URL: "http://localhost:8100"
   api-feed:
-    image: api-feed:v1
+    image: api-feed
     volumes:
       - $HOME/.aws:/root/.aws
     environment:
@@ -34,7 +34,7 @@ services:
       AWS_BUCKET: $AWS_BUCKET
       JWT_SECRET: $JWT_SECRET
       URL: "http://localhost:8100"
-  frontend:
+  udagram-frontend:
     image: udagram-frontend:local
     ports:
       - "8100:80"

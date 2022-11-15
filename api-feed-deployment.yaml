@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-feed-deployment
+  labels:
+    app: api-feed
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api-feed
+  template:
+    metadata:
+      labels:
+        app: api-feed
+    spec:
+      containers:
+      - name: api-feed
+        image:  mamanmeshak/api-feed:v1
+        ports:
+          - containerPort: 8080
+        envFrom:
+          - configMapRef: 
+              name: environment
+          - secretRef:
+              name: secret
